@@ -108,7 +108,8 @@ class DMM:
         # https\\u003a\\u002f\\u002fwww.dmm.com\\u002fmy\\u002f-\\u002fauthorize\\u002f\\u003fresponse\\u005ftype\\u003dcode\\u0026client\\u005fid\\u003...
         # ->
         # https://www.dmm.com/my/-/authorize/?response_type=code&client_id=....
-        auth_href = re.sub(r"\\u00(\w\w)", lambda x: chr(int(x[1], 16)), auth_href)
+        #auth_href = re.sub(r"\\u00(\w\w)", lambda x: chr(int(x[1], 16)), auth_href)
+        auth_href = eval(f'"{auth_href}"')
         auth1 = self.session.get(auth_href, allow_redirects=False)
         self.session.get(auth1.next.url, allow_redirects=False)
         self.session.headers["content-type"] = "application/json"
